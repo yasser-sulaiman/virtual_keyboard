@@ -19,7 +19,7 @@ def calculateIntDidtance(pt1, pt2):
 
 # Creating keys
 w,h = 80, 60
-startX, startY = 40, 420
+startX, startY = 40, 200
 keys=[]
 letters =list("QWERTYUIOPASDFGHJKLZXCVBNM")
 for i,l in enumerate(letters):
@@ -71,7 +71,7 @@ while True:
     if not ret:
         break
     frame = cv2.resize(frame,(int(frameWidth*1.5), int(frameHeight*1.5)))
-    #frame = cv2.flip(frame, 1)
+    frame = cv2.flip(frame, 1)
     #find hands
     frame = tracker.findHands(frame)
     lmList = tracker.getPostion(frame, draw=False)
