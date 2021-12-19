@@ -3,6 +3,7 @@ import numpy as np
 import time
 from keys import *
 from handTracker import *
+from pynput.keyboard import Controller
 
 def getMousPos(event , x, y, flags, param):
     global clickedX, clickedY
@@ -57,6 +58,8 @@ show = False
 cv2.namedWindow('video')
 counter = 0
 previousClick = 0
+
+keyboard = Controller()
 while True:
     if counter >0:
         counter -=1
@@ -119,6 +122,7 @@ while True:
                             textBox.text += " "
                         else:
                             textBox.text += k.text
+                            
                 # writing using fingers
                 if (k.isOver(thumbTipX, thumbTipY)):
                     clickTime = time.time()
@@ -132,6 +136,8 @@ while True:
                                 textBox.text += " "
                             else:
                                 textBox.text += k.text
+                                #simulating the press of actuall keyboard
+                                keyboard.press(k.text)
                         previousClick = clickTime
             k.drawKey(frame,(255,255,255), (0,0,0), alpha=alpha)
             alpha = 0.5
